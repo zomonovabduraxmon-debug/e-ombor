@@ -59,11 +59,12 @@
   .brand-logo{
     height:64px;width:auto;flex-shrink:0;display:block;
     background:#fff;border-radius:12px;padding:6px 12px;
-    animation: logo-spin 4s linear infinite;
+    animation: logo-flip 3.5s linear infinite;
+    transform-style:preserve-3d;
   }
-  @keyframes logo-spin{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
+  @keyframes logo-flip{
+    from{ transform:rotateY(0deg); }
+    to{ transform:rotateY(360deg); }
   }
   .brand-text{display:flex;flex-direction:column;gap:1px;}
   .brand-mark{
