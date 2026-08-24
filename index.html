@@ -59,7 +59,7 @@
   .brand-logo{
     height:64px;width:auto;flex-shrink:0;display:block;
     background:#fff;border-radius:12px;padding:6px 12px;
-    animation: logo-flip 3.5s linear infinite;
+    animation: logo-flip 5s linear infinite;
     transform-style:preserve-3d;
   }
   @keyframes logo-flip{
@@ -116,10 +116,10 @@
   .btn.sm{padding:5px 10px;font-size:12.5px;}
   .btn:disabled{opacity:.45;cursor:not-allowed;}
 
-  .cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
-  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:14px 16px;}
-  .stat-card .num{font-family:var(--serif);font-size:26px;font-weight:700;}
-  .stat-card .lbl{color:var(--muted);font-size:12px;margin-top:2px;letter-spacing:.2px;}
+  .cards-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:20px 22px;}
+  .stat-card .num{font-family:var(--serif);font-size:36px;font-weight:700;}
+  .stat-card .lbl{color:var(--muted);font-size:14px;margin-top:4px;letter-spacing:.2px;}
   .stat-card.warn .num{color:var(--amber);}
   .stat-card.crit .num{color:var(--red);}
 
@@ -491,7 +491,6 @@ function renderDashboard(){
 
     <div class="cards-row">
       <div class="stat-card"><div class="num">${state.permits.length}</div><div class="lbl">Разрешений всего</div></div>
-      <div class="stat-card"><div class="num">${activePermits}</div><div class="lbl">С остатком &gt; 0</div></div>
       <div class="stat-card warn"><div class="num">${warnCount}</div><div class="lbl">Мало осталось</div></div>
       <div class="stat-card crit"><div class="num">${critCount}</div><div class="lbl">Закончено / перерасход</div></div>
     </div>
