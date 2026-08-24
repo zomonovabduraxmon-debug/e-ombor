@@ -344,8 +344,8 @@ function itemStatus(item, used){
   const pct = item.qty ? Math.max(0, remQty) / item.qty : 0;
   let level = 'ok';
   if(remQty < 0) level = 'over';
-  else if(pct <= 0.1) level = 'crit';
-  else if(pct <= 0.3) level = 'warn';
+  else if(remQty === 0) level = 'finished';
+  else if(pct <= 0.25) level = 'warn';
   return { remQty, remWeight: (Number(item.weight)||0) - used.weight, pct, level };
 }
 
@@ -411,17 +411,17 @@ function renderDashboard(){
   const totalQty = view.totalQty;
   const totalWeight = view.totalWeight;
 
-  const critCount = rows.filter(r=>r.st.level==='crit'||r.st.level==='over').length;
+  const critCount = rows.filter(r=>r.st.level==='finished'||r.st.level==='over').length;
   const warnCount = rows.filter(r=>r.st.level==='warn').length;
   const activePermits = state.permits.filter(p=>permitTotals(p).remQty>0).length;
 
   const tableRows = rows.map(r=>{
     const {permit,item,used,st} = r;
     const pctShown = Math.round(Math.max(0,st.pct)*100);
-    const color = st.level==='over' ? 'var(--red)' : st.level==='crit' ? 'var(--red)' : st.level==='warn' ? 'var(--amber)' : 'var(--teal)';
+    const color = st.level==='over' ? 'var(--red)' : st.level==='finished' ? 'var(--red)' : st.level==='warn' ? 'var(--amber)' : 'var(--teal)';
     const badge = st.level==='over' ? '<span class="badge crit">перерасход</span>'
-      : st.level==='crit' ? '<span class="badge crit">почти исчерпано</span>'
-      : st.level==='warn' ? '<span class="badge warn">заканчивается</span>'
+      : st.level==='finished' ? '<span class="badge crit">закончено</span>'
+      : st.level==='warn' ? '<span class="badge warn">мало осталось</span>'
       : '<span class="badge ok">в норме</span>';
     const category = SyncCore.dashboardCategory(r);
     const categoryBadge = category === 'accepted'
@@ -459,8 +459,8 @@ function renderDashboard(){
           <option value="accepted" ${dashboardFilter==='accepted'?'selected':''}>Accepted</option>
           <option value="completed" ${dashboardFilter==='completed'?'selected':''}>Completed</option>
           <option value="ok" ${dashboardFilter==='ok'?'selected':''}>В норме</option>
-          <option value="warn" ${dashboardFilter==='warn'?'selected':''}>Заканчивается</option>
-          <option value="crit" ${dashboardFilter==='crit'?'selected':''}>Почти исчерпано</option>
+          <option value="warn" ${dashboardFilter==='warn'?'selected':''}>Мало осталось</option>
+          <option value="finished" ${dashboardFilter==='finished'?'selected':''}>Закончено</option>
           <option value="over" ${dashboardFilter==='over'?'selected':''}>Перерасход</option>
         </select>
         <select class="dashboard-select" id="dashboardSort" aria-label="Сортировка">
@@ -486,8 +486,8 @@ function renderDashboard(){
     <div class="cards-row">
       <div class="stat-card"><div class="num">${state.permits.length}</div><div class="lbl">Разрешений всего</div></div>
       <div class="stat-card"><div class="num">${activePermits}</div><div class="lbl">С остатком &gt; 0</div></div>
-      <div class="stat-card warn"><div class="num">${warnCount}</div><div class="lbl">Позиций заканчивается</div></div>
-      <div class="stat-card crit"><div class="num">${critCount}</div><div class="lbl">Почти исчерпано / перерасход</div></div>
+      <div class="stat-card warn"><div class="num">${warnCount}</div><div class="lbl">Мало осталось</div></div>
+      <div class="stat-card crit"><div class="num">${critCount}</div><div class="lbl">Закончено / перерасход</div></div>
     </div>
     <div class="panel">
       <div class="panel-head"><h2>Позиции</h2><span class="subtle-note">${rows.length} позиций</span></div>
@@ -516,7 +516,7 @@ function renderPermits(){
   const rows = list.map(p=>{
     const t = permitTotals(p);
     const pct = t.allowedQty ? Math.max(0,t.remQty)/t.allowedQty : 0;
-    const color = t.remQty<0 ? 'var(--red)' : pct<=0.1 ? 'var(--red)' : pct<=0.3 ? 'var(--amber)' : 'var(--teal)';
+    const color = t.remQty<=0 ? 'var(--red)' : pct<=0.25 ? 'var(--amber)' : 'var(--teal)';
     return `<tr class="row-clickable" data-open-permit="${p.id}">
       <td><strong>${escapeHtml(p.number)}</strong><div class="subtle-note">${p.date||''}${p.note?(' · '+escapeHtml(p.note)):''}</div></td>
       <td class="num-col">${p.items.length}</td>

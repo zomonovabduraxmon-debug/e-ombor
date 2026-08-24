@@ -117,7 +117,7 @@
 
     if(filter === 'accepted' || filter === 'completed') {
       rows = rows.filter(row => dashboardCategory(row) === filter);
-    } else if(['ok','warn','crit','over'].includes(filter)) {
+    } else if(['ok','warn','finished','over'].includes(filter)) {
       rows = rows.filter(row => row && row.st && row.st.level === filter);
     }
 
