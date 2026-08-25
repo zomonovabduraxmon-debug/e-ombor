@@ -1,0 +1,32 @@
+E-OMBOR — TEXTILE CLIENT V9
+
+1) GitHub repo rootiga yuklang:
+   ui-v9.css
+   ui-v9.js
+   textile-v9.svg
+   logo.png
+
+2) index.html HEAD qismida UI stylesheetlar quyidagicha bo'lsin:
+
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v9.css">
+
+ui-v7.css va ui-v8.css qatorlarini O'CHIRING.
+
+3) index.html eng pastida faqat:
+
+<script src="./ui-v9.js"></script>
+
+qolsin.
+
+ui-v7.js va ui-v8.js qatorlarini O'CHIRING.
+
+4) config.js, sync-core.js, offline-sync.js va permit/shipment business logicga tegmang.
+
+V9 faqat UI qatlamidir:
+- chap sidebar
+- MENGI TEKSTIL harakatlanuvchi logo
+- textile fon
+- textile iconlar
+- tanlangan screenshotga yaqin header/nav/hero/table layout
+- mavjud til/dark mode/pagination/export saqlanadi
