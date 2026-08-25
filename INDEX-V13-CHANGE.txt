@@ -1,0 +1,27 @@
+E-OMBOR V13 — infinite metric fix
+
+GitHub repo rootiga yuklang:
+- ui-v13.css
+- ui-v13.js
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v13.css">
+
+Eski ui-v12.css linkini olib tashlang.
+
+index.html eng pastida:
+<script src="./ui-v13.js"></script>
+
+Eski ui-v12.js scriptini olib tashlang.
+
+V11 assetlar o'zgarishsiz qoladi:
+- textile-bg-v11.svg
+- textile-rolls-v11.svg
+- logo.png
+
+V13 fix:
+- Jami nomenklaturalar / Jami vazn label loop to'xtatilgan.
+- Oldin yig'ilib qolgan duplicate labellar avtomatik tozalanadi.
+- Har metric: yuqorida label, pastida raqam + unit.
+- Permit/shipment data logikasiga tegilmagan.
