@@ -1,0 +1,20 @@
+E-OMBOR V10 FIX
+
+GitHub repo rootiga yuklang:
+- ui-v10.css
+- ui-v10.js
+- textile-v10.svg
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v10.css">
+
+Eski ui-v9.css linkini olib tashlang.
+
+index.html eng pastida:
+<script src="./ui-v10.js"></script>
+
+Eski ui-v9.js scriptini olib tashlang.
+
+logo.png o'zgarishsiz qoladi.
+config.js, sync-core.js, offline-sync.js va permit/shipment data logikasiga tegmang.
