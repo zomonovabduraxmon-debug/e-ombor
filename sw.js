@@ -1,4 +1,4 @@
-const CACHE = 'permit-tracker-shell-v4';
+const CACHE = 'permit-tracker-shell-v10';
 const APP_SHELL = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const APP_SHELL = [
   './offline-sync.js',
   './manifest.webmanifest',
   './icon.svg',
+  './bg-icon.png',
   'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'
 ];
 
