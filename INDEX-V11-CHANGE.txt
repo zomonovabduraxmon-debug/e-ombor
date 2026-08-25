@@ -1,0 +1,21 @@
+E-OMBOR V11
+
+Repo rootiga yuklang:
+- ui-v11.css
+- ui-v11.js
+- textile-bg-v11.svg
+- textile-rolls-v11.svg
+
+index.html HEAD qismida:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v11.css">
+
+Eski ui-v10.css linkini olib tashlang.
+
+index.html eng pastida:
+<script src="./ui-v11.js"></script>
+
+Eski ui-v10.js scriptini olib tashlang.
+
+logo.png o'zgarmaydi.
+config.js, sync-core.js, offline-sync.js va permit/shipment data logikasiga tegmang.
