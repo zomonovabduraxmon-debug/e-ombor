@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#1a2338">
 <link rel="manifest" href="./manifest.webmanifest">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
 <script src="./config.js"></script>
 <script src="./sync-core.js"></script>
 <script src="./offline-sync.js"></script>
@@ -245,6 +246,29 @@
   .table-total-label{text-align:right;color:var(--primary);}
 
   footer{max-width:1180px;margin:0 auto;padding:10px 28px 40px 28px;color:var(--muted);font-size:11.5px;}
+  .footer-contacts{
+    max-width:1180px;margin:24px auto 0 auto;padding:22px 28px;
+    border-top:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  .footer-contacts .fc-brand{font-family:var(--serif);font-weight:700;color:var(--primary);font-size:14px;}
+  .fc-links{display:flex;gap:22px;flex-wrap:wrap;}
+  .fc-social{display:flex;gap:12px;flex-shrink:0;}
+  .fc-link{
+    display:inline-flex;align-items:center;gap:7px;color:var(--ink);font-size:13px;font-weight:600;
+    text-decoration:none;
+  }
+  .fc-link:hover{color:var(--primary);}
+  .fc-link svg{width:17px;height:17px;flex-shrink:0;}
+  .fc-icon-btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;flex-shrink:0;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .fc-icon-btn:hover{transform:translateY(-2px);}
+  .fc-icon-btn svg{width:20px;height:20px;}
+  .fc-icon-btn.instagram{background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7);}
+  .fc-icon-btn.telegram{background:#28a8e9;}
 
   @media (max-width:720px){
     .cards-row{grid-template-columns:repeat(2,1fr);}
@@ -283,6 +307,9 @@
 
     .panel-head{flex-direction:column;align-items:flex-start;gap:8px;}
 
+    .footer-contacts{flex-direction:column;align-items:flex-start;padding:18px 14px;gap:14px;}
+    .fc-links{gap:12px;flex-direction:column;}
+    .fc-social{gap:10px;}
     .modal-backdrop{padding:0;}
     .modal{max-width:100%;width:100%;min-height:100vh;border-radius:0;}
     .modal-body{padding:14px;max-height:calc(100vh - 116px);}
@@ -317,6 +344,27 @@
 </div>
 
 <div class="wrap" id="app"><div class="empty"><div class="big">Загрузка…</div></div></div>
+<div class="footer-contacts">
+  <div class="fc-brand">MENGI TEKSTIL</div>
+  <div class="fc-links">
+    <a class="fc-link" href="tel:+998944296565">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      +998 94 429 65 65
+    </a>
+    <a class="fc-link" href="mailto:zomonov.abduraxmon@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      zomonov.abduraxmon@gmail.com
+    </a>
+  </div>
+  <div class="fc-social">
+    <a class="fc-icon-btn instagram" href="https://instagram.com/abduraxmon_offical" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+    </a>
+    <a class="fc-icon-btn telegram" href="https://t.me/Soliq_accauntant" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+      <svg viewBox="0 0 24 24" fill="#fff"><path d="M21.94 4.53 18.6 20.3c-.25 1.1-.9 1.37-1.82.85l-5-3.68-2.42 2.33c-.27.27-.5.5-1 .5l.36-5.1L18.2 6.7c.42-.37-.1-.58-.65-.2L6.2 13.6l-4.98-1.56c-1.08-.34-1.1-1.08.23-1.6L20.6 3.4c.9-.33 1.68.2 1.34 1.13z"></path></svg>
+    </a>
+  </div>
+</div>
 <footer>Offline-first: изменения сначала сохраняются на этом устройстве. При появлении интернета они автоматически синхронизируются с общей базой Supabase.</footer>
 <div class="toast" id="toast">Отгрузка сохранена, остатки обновлены</div>
 

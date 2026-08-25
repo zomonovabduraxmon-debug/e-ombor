@@ -1,4 +1,4 @@
-const CACHE = 'permit-tracker-shell-v10';
+const CACHE = 'permit-tracker-shell-v12';
 const APP_SHELL = [
   './',
   './index.html',
