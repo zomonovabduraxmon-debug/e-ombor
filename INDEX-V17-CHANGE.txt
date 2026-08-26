@@ -1,0 +1,33 @@
+E-OMBOR V17 — approved control row + Recent Changes
+
+GitHub repo rootiga yuklang:
+- ui-v17.css
+- ui-v17.js
+- logo-symbol-v16.png   (agar V16 da allaqachon bo'lsa qayta yuklash shart emas)
+
+Repo'da avvalgidek qoladi:
+- textile-bg-v11.svg
+- textile-rolls-v11.svg
+- logo.png
+- client-final-fixed.css
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v17.css">
+
+Eski ui-v16.css linkini olib tashlang.
+
+index.html eng pastida:
+<script src="./ui-v17.js"></script>
+
+Eski ui-v16.js scriptini olib tashlang.
+
+V17:
+- Search / Filter / Sort bitta premium control strip ko'rinishida.
+- Cmd/Ctrl + K searchni focus qiladi.
+- Eski sliders tugma olib tashlanadi.
+- O'rniga “So'nggi o'zgarishlar” ishlaydigan tugma chiqadi.
+- Tugma oxirgi 24 soatdagi permit/shipment updated_at yozuvlarini IndexedDB'dan READ-ONLY o'qiydi.
+- O'ng tomondan activity drawer ochiladi.
+- 4 til va dark mode bilan mos.
+- Permit/shipment save logic o'zgarmaydi.
