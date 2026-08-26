@@ -1,0 +1,20 @@
+E-OMBOR V16 — clean company logo
+
+Upload to GitHub repo root:
+- ui-v16.css
+- ui-v16.js
+- logo-symbol-v16.png
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v16.css">
+
+Remove the old ui-v15.css link.
+
+Before </body>:
+<script src="./ui-v16.js"></script>
+
+Remove the old ui-v15.js script.
+
+The original logo.png stays in the repo.
+V16 uses logo-symbol-v16.png only for the standalone symbol.
