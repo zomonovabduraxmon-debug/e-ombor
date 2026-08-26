@@ -1,0 +1,20 @@
+E-OMBOR V18 — aligned controls + visible Recent Changes
+
+Upload:
+- ui-v18.css
+- ui-v18.js
+
+index.html:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v18.css">
+
+and before </body>:
+<script src="./ui-v18.js"></script>
+
+Remove ui-v17.css and ui-v17.js links.
+
+Fixes:
+- 4 equal-width columns: Search | Filter | Sort | Recent changes
+- blank last box removed
+- Recent changes label/icon always visible
+- recent activity still opens 24h read-only drawer
