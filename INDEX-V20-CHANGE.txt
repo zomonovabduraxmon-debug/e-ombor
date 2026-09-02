@@ -1,0 +1,24 @@
+E-OMBOR V20 — permit item material/fabric
+
+GitHub repo rootiga yuklang:
+- ui-v20.css
+- ui-v20.js
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v20.css">
+
+Eski ui-v19.css linkini olib tashlang.
+
+index.html eng pastida:
+<script src="./ui-v20.js"></script>
+
+Eski ui-v19.js scriptini olib tashlang.
+
+V20:
+- Har bir ruxsatnoma pozitsiyasiga Material / Mato input qo'shildi.
+- Material item ichida saqlanadi va savePermits() orqali mavjud OfflineSync/Supabase oqimi bilan saqlanadi.
+- Ruxsatnoma detail oynasida: Nomi -> Material -> TN VED -> Ruxsat etilgan son...
+- Eski ruxsatnomalarda material bo'lmasa “—” ko'rinadi.
+- Material erkin matn: masalan 100% paxta, trikotaj, polyester, denim.
+- Permit/shipment eski ma'lumotlari reset qilinmaydi.
