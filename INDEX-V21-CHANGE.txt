@@ -1,0 +1,27 @@
+E-OMBOR V21 — permit columns + login-only editing
+
+Upload to GitHub repo root:
+- ui-v21.css
+- ui-v21.js
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v21.css">
+
+Remove old ui-v20.css link.
+
+Before </body>:
+<script src="./ui-v21.js"></script>
+
+Remove old ui-v20.js script.
+
+V21:
+- Ruxsatnomalar table columns are fixed/aligned with headers.
+- Pozitsiyalar count is centered directly under Pozitsiyalar.
+- Other numeric columns align directly under their headers.
+- Before login: add/edit/delete permit, save shipment, confirm upload, delete shipment are blocked.
+- Clicking a locked edit control opens the login prompt.
+- After login: edit controls unlock automatically via OfflineSync.authInfo().
+- Existing permit/shipment data is not reset.
+- Material feature from V20 remains.
+- Redundant “masalan:” prefixes are removed from material placeholders.
