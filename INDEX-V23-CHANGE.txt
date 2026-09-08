@@ -1,0 +1,39 @@
+E-OMBOR V23 — structural redesign matching the approved mockup
+
+Upload to GitHub repo root:
+- ui-v23.css
+- ui-v23.js
+
+Keep existing assets:
+- client-final-fixed.css
+- textile-bg-v11.svg
+- textile-rolls-v11.svg
+- logo-symbol-v16.png
+- logo.png
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v23.css">
+
+Remove the old ui-v22.css link.
+
+Before </body>:
+<script src="./ui-v23.js"></script>
+
+Remove the old ui-v22.js script.
+
+V23 structural changes:
+- Old 4-card top navigation is hidden.
+- Full fixed left sidebar with text labels is created.
+- Brand moves into the sidebar like the approved mockup.
+- Header becomes compact and contains global search + existing account controls.
+- Dashboard is rebuilt as: page header -> 4 KPI cards -> 2 analytics cards -> filter row -> positions table.
+- Real data is used for KPI values, shipment bars and material distribution.
+- Permits page gets compact page header/tools/table composition.
+- Shipment, export, reports, create/edit/detail modals use the same design system.
+- A read-only Reports page is added from existing in-memory data.
+
+Safety:
+- Existing permit/material/shipment/sync/export logic remains inherited.
+- V21 login-only edit protection remains present.
+- V23 structural functions do not write permit/shipment collections.
