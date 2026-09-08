@@ -1,0 +1,43 @@
+E-OMBOR V22 — full approved visual redesign
+
+Upload to GitHub repo root:
+- ui-v22.css
+- ui-v22.js
+
+Keep existing assets in repo:
+- client-final-fixed.css
+- textile-bg-v11.svg
+- textile-rolls-v11.svg
+- logo-symbol-v16.png
+- logo.png
+
+index.html HEAD:
+<link rel="stylesheet" href="./client-final-fixed.css">
+<link rel="stylesheet" href="./ui-v22.css">
+
+Remove the old ui-v21.css link.
+
+Before </body>:
+<script src="./ui-v22.js"></script>
+
+Remove the old ui-v21.js script.
+
+V22 visual scope:
+- full white/navy/light-blue design system matching approved mockup
+- textile background pattern and subtle geometry
+- refreshed sticky header, brand, controls and login
+- cleaner left sidebar and active state
+- four navigation cards restyled
+- dashboard hero/KPI/panels/table system restyled
+- search/filter/recent activity restyled
+- permits list table restyled
+- "Yangi ruxsatnoma" is spacious creation modal
+- "Tahrirlash" is a denser edit modal with permit badge and position count
+- permit detail modal restyled
+- export card restyled
+- responsive and dark mode adjustments
+
+Data/auth safety:
+- V22 keeps V21 auth gate.
+- Permit/material/shipment/sync/export business logic is inherited unchanged.
+- V22 adds presentation decorators only; no new collection reset/migration.
