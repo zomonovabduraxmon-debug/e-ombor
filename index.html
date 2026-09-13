@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru"><head>
+<html lang="uz" class="eombor-design"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OMBOR QOLDIG'I</title>
+<title>E-Ombor · Mengi Tekstil</title>
 <meta name="theme-color" content="#1a2338">
 <link rel="manifest" href="./manifest.webmanifest">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -320,8 +320,10 @@
 </style>
 <link rel="stylesheet" href="./client-final-fixed.css">
 <link rel="stylesheet" href="./ui-v23.css">
+<link rel="stylesheet" href="./design.css">
 </head>
 <body>
+<a class="skip-link" href="#app">Asosiy tarkibga o‘tish</a>
 
 <div class="topbar">
   <div class="topbar-inner">
@@ -345,7 +347,7 @@
   </div>
 </div>
 
-<div class="wrap" id="app"><div class="empty"><div class="big">Загрузка…</div></div></div>
+<main class="wrap" id="app" tabindex="-1"><div class="empty"><div class="big">Yuklanmoqda…</div></div></main>
 <div class="footer-contacts">
   <div class="fc-brand">MENGI TEKSTIL</div>
   <div class="fc-links">
@@ -368,7 +370,7 @@
   </div>
 </div>
 <footer>Offline-first: изменения сначала сохраняются на этом устройстве. При появлении интернета они автоматически синхронизируются с общей базой Supabase.</footer>
-<div class="toast" id="toast">Отгрузка сохранена, остатки обновлены</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Отгрузка сохранена, остатки обновлены</div>
 
 <script>
 /* ============================= STATE & STORAGE ============================= */
@@ -481,6 +483,7 @@ function render(){
   else if(currentTab==='permits') app.innerHTML = renderPermits();
   else if(currentTab==='shipment') app.innerHTML = renderShipmentTab();
   else if(currentTab==='export') app.innerHTML = renderExportTab();
+  else if(currentTab==='reports' && typeof window.renderEomborReports==='function') window.renderEomborReports();
   bindTabEvents();
 }
 

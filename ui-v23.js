@@ -158,8 +158,7 @@
     }
 
     const materials = Array.from(materialMap.values())
-      .sort((a,b)=>b.weight-a.weight || b.count-a.count)
-      .slice(0,5);
+      .sort((a,b)=>b.weight-a.weight || b.count-a.count);
 
     return {
       permits:permits.length,
@@ -527,7 +526,7 @@
 
   /* Browser-only augmentation. */
   if(typeof window !== 'undefined' && typeof document !== 'undefined'){
-    let currentLang = normalizeLang(localStorage.getItem(LANG_KEY) || 'ru');
+    let currentLang = normalizeLang(localStorage.getItem(LANG_KEY) || 'uz');
     let currentTheme = localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : 'light';
     let dashboardPage = 1;
     let v10SideSelection = 'dashboard';
@@ -1929,7 +1928,7 @@
     }
 
     function createBrandV15(){
-      const brand = document.querySelector('.topbar .brand');
+      const brand = document.querySelector('.brand');
       if(!brand) return;
       if(brand.querySelector('.brand-v15')) return;
 
@@ -2426,13 +2425,7 @@
 
     function installV22DesignSystem(){
       decorateV22Surface();
-      if(document.documentElement.dataset.v22Observer==='1') return;
-      document.documentElement.dataset.v22Observer='1';
-
-      const observer = new MutationObserver(()=>{
-        requestAnimationFrame(decorateV22Surface);
-      });
-      observer.observe(document.body,{childList:true,subtree:true});
+      // A single observer owns enhancement scheduling, including modal changes.
     }
 
     function v23Lang(){
@@ -2457,6 +2450,7 @@
         shipment:'<path d="M3 7h10v9H3zM13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
         export:'<path d="M5 13h14l-2 7H7z"/><path d="M12 3v10M8.5 6.5 12 3l3.5 3.5"/>',
         reports:'<path d="M4 20V10M9 20V5M14 20v-8M19 20V3"/><path d="M3 20h18"/>',
+        search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
         settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.6v-.1A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3V9.6h.1A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.15.36.36.7.6 1 .3.3.7.43 1.1.4h.1v4h-.1a1.7 1.7 0 0 0-1.7.6Z"/>',
         logout:'<path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/>'
       };
@@ -2500,14 +2494,15 @@
       ];
       const nav = side.querySelector('.v23-sidebar-nav');
       nav.innerHTML = items.map(([tab,icon,label])=>`
-        <button class="v23-nav-btn" type="button" data-v23-tab="${tab}">
+        <button class="v23-nav-btn" type="button" data-v23-tab="${tab}" title="${label}" aria-label="${label}">
           <span class="v23-nav-icon">${v23Icon(icon)}</span><span>${label}</span>
         </button>`).join('');
 
       const bottom = side.querySelector('.v23-sidebar-bottom');
+      const themeLabel = getText(currentTheme==='dark' ? 'lightMode' : 'darkMode');
       bottom.innerHTML = `
-        <button class="v23-nav-btn v23-secondary-nav" type="button" data-v23-action="settings"><span class="v23-nav-icon">${v23Icon('settings')}</span><span>${copy.settings}</span></button>
-        <button class="v23-nav-btn v23-secondary-nav" type="button" data-v23-action="logout"><span class="v23-nav-icon">${v23Icon('logout')}</span><span>${copy.logout}</span></button>`;
+        <button class="v23-nav-btn v23-secondary-nav" type="button" data-v23-action="settings" aria-label="${themeLabel}"><span class="v23-nav-icon">${v23Icon('settings')}</span><span>${themeLabel}</span></button>
+        <button class="v23-nav-btn v23-secondary-nav" type="button" data-v23-action="logout" aria-label="${getText('login')}"><span class="v23-nav-icon">${v23Icon('logout')}</span><span>${document.getElementById('authBtn')?.textContent || getText('login')}</span></button>`;
 
       nav.querySelectorAll('[data-v23-tab]').forEach(btn=>btn.addEventListener('click',()=>{
         const tab = btn.dataset.v23Tab;
@@ -2522,7 +2517,7 @@
       }));
 
       bottom.querySelector('[data-v23-action="settings"]')?.addEventListener('click',()=>{
-        document.querySelector('.theme-toggle-v5,[data-action="theme"]')?.click();
+        toggleTheme();
       });
       bottom.querySelector('[data-v23-action="logout"]')?.addEventListener('click',()=>document.getElementById('authBtn')?.click());
       updateV23Nav();
@@ -2535,7 +2530,7 @@
       if(!shell){
         shell = document.createElement('label');
         shell.className = 'v23-top-search';
-        shell.innerHTML = `<span class="v23-top-search-icon">${v23Icon('search')}</span><input id="v23GlobalSearch" autocomplete="off"><kbd>⌘ K</kbd>`;
+        shell.innerHTML = `<span class="v23-top-search-icon">${v23Icon('search')}</span><input id="v23GlobalSearch" autocomplete="off"><kbd>Ctrl K</kbd>`;
         top.insertBefore(shell,document.querySelector('.topbar-actions'));
         const input = shell.querySelector('input');
         input.addEventListener('input',()=>{
@@ -2551,6 +2546,7 @@
       }
       const input=shell.querySelector('input');
       input.placeholder=v23Text().search;
+      input.setAttribute('aria-label',v23Text().search);
       shell.hidden = !['dashboard','permits'].includes(currentTab);
       if(currentTab==='dashboard' && document.getElementById('dashSearch')) input.value=dashboardSearch||'';
       if(currentTab==='permits' && shell.dataset.lastTab!=='permits') input.value='';
@@ -2563,7 +2559,7 @@
         .slice(-7);
       const values = rows.map(s=>(Array.isArray(s.lines)?s.lines:[]).reduce((sum,l)=>sum+(Number(l.weight)||0),0));
       const max=Math.max(1,...values);
-      return values.length ? values.map((v,i)=>`<div class="v23-bar-col"><div class="v23-bar" style="height:${Math.max(12,Math.round(v/max*100))}%"></div><span>${i+1}</span></div>`).join('') : '<div class="v23-chart-empty">—</div>';
+      return values.length ? values.map((v,i)=>`<div class="v23-bar-col" title="${escapeAttr(rows[i].invoiceNumber||'')} · ${fmt(v,1)} kg"><small>${fmt(v,0)}</small><div class="v23-bar" style="height:${Math.max(0,Math.round(v/max*100))}%"></div><span>${escapeHtml(rows[i].invoiceDate||String(i+1))}</span></div>`).join('') : `<div class="v23-chart-empty">${getText('noFilterData')}</div>`;
     }
 
     function v23MaterialDonut(metrics){
@@ -2739,6 +2735,9 @@
     function scheduleEnhance(){
       clearTimeout(enhanceTimer);
       enhanceTimer = setTimeout(()=>{
+        // Disconnect while decorating so our own DOM writes cannot recurse.
+        observer?.disconnect();
+        try{
         createQuickControlBar();
         createBrandV15();
         decorateLoginModalV15();
@@ -2751,6 +2750,9 @@
         decorateV23Surface();
         applyDashboardPagination();
         styleExportPanel();
+        } finally {
+          observer?.observe(document.body,{childList:true,subtree:true,characterData:true});
+        }
       },0);
     }
 
@@ -3126,6 +3128,8 @@
     }
 
     function initBrowser(){
+      window.renderEomborReports = renderV23Reports;
+      createBrandV15();
       installPermitMaterialV20();
       installMutationGuardV21();
       refreshAuthGateV21();
@@ -3155,6 +3159,10 @@
         }
       }, true);
       document.addEventListener('keydown', e=>{
+        if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='k'){
+          const search = document.getElementById('v23GlobalSearch');
+          if(search && !search.closest('[hidden]')){ e.preventDefault(); search.focus(); search.select(); }
+        }
         if(e.key==='Escape'){
           closeLanguageMenu();
           closeQuickAppsMenu();
@@ -3166,14 +3174,8 @@
         if(e.target && (e.target.id==='dashboardFilter' || e.target.id==='dashboardSort')) dashboardPage = 1;
       }, true);
 
-      const observed = document.getElementById('app') || document.body;
       observer = new MutationObserver(()=>scheduleEnhance());
-      observer.observe(observed,{childList:true,subtree:true,characterData:true});
-      const topbar = document.querySelector('.topbar');
-      if(topbar && topbar !== observed){
-        const topObserver = new MutationObserver(()=>scheduleEnhance());
-        topObserver.observe(topbar,{childList:true,subtree:true,characterData:true});
-      }
+      observer.observe(document.body,{childList:true,subtree:true,characterData:true});
       scheduleEnhance();
     }
 

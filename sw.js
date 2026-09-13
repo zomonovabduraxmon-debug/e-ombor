@@ -1,4 +1,5 @@
-const CACHE = 'permit-tracker-shell-v12';
+const CACHE_PREFIX = 'permit-tracker-shell-';
+const CACHE = CACHE_PREFIX + 'v24';
 const APP_SHELL = [
   './',
   './index.html',
@@ -8,7 +9,18 @@ const APP_SHELL = [
   './manifest.webmanifest',
   './icon.svg',
   './bg-icon.png',
-  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'
+  './logo.png',
+  './logo-symbol-v16.png',
+  './client-final-fixed.css',
+  './ui-v23.css',
+  './design.css',
+  './ui-v23.js',
+  './textile-bg-v11.svg',
+  './textile-rolls-v11.svg',
+  './textile-v9.svg',
+  './textile-v10.svg',
+  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js'
 ];
 
 self.addEventListener('install', event => {
@@ -23,7 +35,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
+    caches.keys().then(keys => Promise.all(keys.filter(k=>k.startsWith(CACHE_PREFIX) && k!==CACHE).map(k=>caches.delete(k))))
       .then(()=>self.clients.claim())
   );
 });
